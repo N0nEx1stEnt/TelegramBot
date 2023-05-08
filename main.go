@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	bot, err := tgbotapi.NewBotAPI("6118910710:AAF-lrqev-cGtd78Al69qbJKsIoNPUgpwro")
+	bot, err := tgbotapi.NewBotAPI("TG-ID-Bot")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -33,11 +33,12 @@ func main() {
 		switch update.Message.Text {
 		case "/start":
 			msg.Text = "Привет! Я тестовый бот. \nВыбери нужное действие"
-		case "Кнопки":
+			msg.ReplyMarkup = createButtons()
+		case "/help":
 			msg.Text = "Что бы вы хотели?"
 			msg.ReplyMarkup = createButtons()
 		default:
-			msg.Text = "Прошу прощения! Но я вас не понимаю :("
+			msg.Text = "Прошу прощения! Но я вас не понимаю :(\n С помощью команды \"\\help\" можно получить список команд"
 		}
 
 		_, err := bot.Send(msg)
